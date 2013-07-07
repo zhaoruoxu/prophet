@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Prophet.Frontend
 {
-    public class Message : IEnumerable<Context>
+    public class Message
     {
         private readonly int _id;
         private int _traceCount;
@@ -48,16 +48,6 @@ namespace Prophet.Frontend
         public void Add(Context c)
         {
             _contexts.Add(c);
-        }
-
-        public IEnumerator<Context> GetEnumerator()
-        {
-            return _contexts.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
     }
 }

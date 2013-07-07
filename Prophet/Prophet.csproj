@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Logger.cs" />
+    <Compile Include="Core\ITraceAnalyzer.cs" />
+    <Compile Include="Core\TraceDriver.cs" />
     <Compile Include="Frontend\Context.cs" />
     <Compile Include="Frontend\Disasm.cs" />
     <Compile Include="Frontend\FrontendCore.cs" />
@@ -65,9 +67,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
