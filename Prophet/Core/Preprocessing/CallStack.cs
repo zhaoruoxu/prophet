@@ -8,9 +8,17 @@ using System.Threading.Tasks;
 
 namespace Prophet.Core.Preprocessing
 {
-    public class ProcStack
+    public class StackHashComparer : IComparer<ProcStack>
     {
-        private readonly LinkedList<Procedure> _stack = new LinkedList<Procedure>();
+        public int Compare(ProcStack x, ProcStack y)
+        {
+            return x.GetHashCode().CompareTo(y.GetHashCode());
+        }
+    }
+
+    public class ProcStack : ICloneable
+    {
+        private LinkedList<Procedure> _stack = new LinkedList<Procedure>();
 
         public void Clear()
         {
@@ -31,7 +39,16 @@ namespace Prophet.Core.Preprocessing
 
         public override int GetHashCode()
         {
+            Debug.Assert(_stack != null);
             return _stack.Aggregate(0, (current, t) => current*13131 + (int) t.Entry);
+        }
+
+        public object Clone()
+        {
+            var r = new ProcStack {_stack = new LinkedList<Procedure>(_stack)};
+            //foreach (var v in _stack)
+            //    r._stack.AddLast(v);
+            return r;
         }
     }
 
@@ -43,6 +60,11 @@ namespace Prophet.Core.Preprocessing
         public CallStack(ProcScope ps)
         {
             _procs = ps;
+        }
+
+        public ProcStack Get()
+        {
+            return _stack;
         }
 
         public void Reset()

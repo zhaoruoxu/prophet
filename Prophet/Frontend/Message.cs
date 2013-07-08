@@ -12,6 +12,7 @@ namespace Prophet.Frontend
         private readonly int _id;
         private int _traceCount;
         private int _len;
+        private UInt32 _addr;
         private byte[] _data;
         private List<Context> _contexts;
 
@@ -29,16 +30,19 @@ namespace Prophet.Frontend
                     throw new ApplicationException("Data is already set");
             }
         }
+        public UInt32 Base { get { return _addr; } }
+        public UInt32 End { get { return _addr + (UInt32) _len; } }
 
         public int BeginIndex { get; set; }
         public int EndIndex { get; set; }
 
-        public Message(int id, int traceCount, int len)
+        public Message(int id, int traceCount, UInt32 addr, int len)
         {
             _contexts = new List<Context>();
             _id = id;
             _traceCount = traceCount;
             _len = len;
+            _addr = addr;
             BeginIndex = 0;
             EndIndex = traceCount - 1;
         }

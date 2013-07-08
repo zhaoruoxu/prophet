@@ -34,7 +34,22 @@ namespace Prophet.Core
 
             driver.RunMessage(msg);
 
-            procScope.Dump(new FileStream(@"d:\procscope.txt", FileMode.OpenOrCreate), _frontend.Disasm);
+            using (var f = new FileStream(@"d:\procscope.txt", FileMode.OpenOrCreate))
+            {
+                procScope.Dump(f, _frontend.Disasm);
+            }
+            
+
+            var callStack = new CallStack(procScope);
+            var accessLog = new AccessLog(msg, callStack);
+            driver.Add(callStack).Add(accessLog);
+            driver.RunMessage(msg);
+
+
+            using (var f = new FileStream(@"d:\accesslog.txt", FileMode.OpenOrCreate))
+            {
+                accessLog.Dump(f);
+            }
         }
     }
 }

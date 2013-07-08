@@ -64,6 +64,7 @@ namespace Prophet.Frontend
                         var msg = new Message(
                             Convert.ToInt32(reader["id"]),
                             Convert.ToInt32(reader["trace_count"]),
+                            (UInt32) Convert.ToInt32(reader["addr"]),
                             Convert.ToInt32(reader["length"]));
                         LoadMessage(conn, msg);
                     }

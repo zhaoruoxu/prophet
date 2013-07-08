@@ -37,6 +37,7 @@ namespace Prophet.Frontend
     {
         public string Text { get; set; }
         public UInt32 Eip { get; set; }
+        public int Length { get; set; }
         public int Category { get; set; }
         public UInt32 Opcode { get; set; }
         public string Mnemonic { get; set; }
@@ -59,6 +60,7 @@ namespace Prophet.Frontend
             var inst = new Instruction();
             inst.Eip = (UInt32)Convert.ToInt32(reader["eip"]);
             inst.Text = reader["instr"].ToString();
+            inst.Length = Convert.ToInt32(reader["len"]);
             inst.Category = Convert.ToInt32(reader["category"]);
             inst.Opcode = (UInt32)Convert.ToInt32(reader["opcode"]);
             inst.Mnemonic = reader["mnemonic"].ToString();

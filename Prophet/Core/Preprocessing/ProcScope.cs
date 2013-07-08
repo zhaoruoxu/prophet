@@ -136,16 +136,18 @@ namespace Prophet.Core.Preprocessing
 
         public void Dump(Stream stream, Disasm disasm)
         {
-            var writer = new StreamWriter(stream);
-            foreach (var proc in _procs)
+            using (var writer = new StreamWriter(stream))
             {
-                writer.WriteLine(proc.Value);
-                var q = from p in proc.Value.Addrs orderby p select string.Format("{0:x8} {1}", p, disasm[p].Text);
-                foreach (var l in q)
+                foreach (var proc in _procs)
                 {
-                    writer.WriteLine(l);
+                    writer.WriteLine(proc.Value);
+                    var q = from p in proc.Value.Addrs orderby p select string.Format("{0:x8} {1}", p, disasm[p].Text);
+                    foreach (var l in q)
+                    {
+                        writer.WriteLine(l);
+                    }
+                    writer.WriteLine();
                 }
-                writer.WriteLine();
             }
         }
     }
