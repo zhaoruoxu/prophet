@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Prophet.Common;
 
 namespace Prophet.Frontend
 {
@@ -43,7 +44,9 @@ namespace Prophet.Frontend
         public int Tid { get; set; }
         public int ExtTid { get; set; }
 
-        public static Context Parse(SQLiteDataReader reader)
+        public Instruction Inst { get; set; }
+
+        public static Context Parse(SQLiteDataReader reader, Disasm disasm)
         {
             var r = new Context();
             r.Id = Convert.ToInt64(reader["id"]);
@@ -63,7 +66,13 @@ namespace Prophet.Frontend
             r.ExecFlag = (UInt32) Convert.ToInt32(reader["exec_flag"]);
             r.Tid = Convert.ToInt32(reader["tid"]);
             r.ExtTid = Convert.ToInt32(reader["ext_tid"]);
+            r.Inst = disasm[r.Eip];
             return r;
+        }
+
+        public bool HasExecFlag(ExecFlag f)
+        {
+            return (ExecFlag & (uint) f) != 0;
         }
     }
 }

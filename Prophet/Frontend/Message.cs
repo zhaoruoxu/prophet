@@ -13,7 +13,7 @@ namespace Prophet.Frontend
         private int _traceCount;
         private int _len;
         private byte[] _data;
-        private readonly List<Context> _contexts = new List<Context>();
+        private List<Context> _contexts;
 
         public int Id { get { return _id; } }
         public int TraceCount { get { return _traceCount; } }
@@ -30,11 +30,17 @@ namespace Prophet.Frontend
             }
         }
 
+        public int BeginIndex { get; set; }
+        public int EndIndex { get; set; }
+
         public Message(int id, int traceCount, int len)
         {
+            _contexts = new List<Context>();
             _id = id;
             _traceCount = traceCount;
             _len = len;
+            BeginIndex = 0;
+            EndIndex = traceCount - 1;
         }
 
         public Context this[int index]

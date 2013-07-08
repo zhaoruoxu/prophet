@@ -77,5 +77,49 @@ namespace Prophet.Frontend
             inst.AuxSib = (UInt32)Convert.ToInt32(reader["aux_sib"]);
             return inst;
         }
+
+        public bool IsCall
+        {
+            get { return Mnemonic.StartsWith("call"); }
+        }
+
+        public bool IsRet
+        {
+            get { return Opcode == 0xc3 || Opcode == 0xcb || Opcode == 0xc2 || Opcode == 0xca; }
+        }
+
+        public bool IsConditionalJump
+        {
+            get
+            {
+                return (Opcode >= 0x70 && Opcode < 0x80) || (Opcode >= 0x0f80 && Opcode < 0x0f90)
+                       || (Opcode == 0xe2) || (Opcode == 0xe3);
+            }
+        }
+
+        public bool IsIndirectJump
+        {
+            get { return Opcode == 0xff && Mnemonic.StartsWith("jmp"); }
+        }
+
+        public bool IsCmp
+        {
+            get { return Mnemonic.StartsWith("cmp"); }
+        }
+
+        public bool IsPop
+        {
+            get { return Mnemonic.StartsWith("pop"); }
+        }
+
+        public bool IsTest
+        {
+            get { return Mnemonic.StartsWith("test"); }
+        }
+
+        public bool IsCmpOrTest
+        {
+            get { return IsCmp || IsTest; }
+        }
     }
 }

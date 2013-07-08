@@ -113,7 +113,7 @@ namespace Prophet.Frontend
                 {
                     while (reader.Read())
                     {
-                        var ctx = Context.Parse(reader);
+                        var ctx = Context.Parse(reader, _disasm);
                         msg.Add(ctx);
                     }
                 }
