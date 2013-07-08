@@ -61,6 +61,11 @@ namespace Prophet.Core.Preprocessing
         private Stack<Procedure> _callStack = new Stack<Procedure>();
         //private HashSet<Procedure> _entries = new HashSet<Procedure>();
 
+        public bool TryGet(UInt32 addr, out Procedure p)
+        {
+            return _procs.TryGetValue(addr, out p);
+        }
+
         public void Reset()
         {
             _procs.Clear();
