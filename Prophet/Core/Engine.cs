@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,8 @@ namespace Prophet.Core
             driver.Add(procScope);
 
             driver.RunMessage(msg);
+
+            procScope.Dump(new FileStream(@"d:\procscope.txt", FileMode.OpenOrCreate), _frontend.Disasm);
         }
     }
 }

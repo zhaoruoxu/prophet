@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -126,6 +127,21 @@ namespace Prophet.Core.Preprocessing
             proc = new Procedure(ctx.Eip);
             _procs.Add(ctx.Eip, proc);
             return proc;
+        }
+
+        public void Dump(Stream stream, Disasm disasm)
+        {
+            var writer = new StreamWriter(stream);
+            foreach (var proc in _procs)
+            {
+                writer.WriteLine(proc.Value);
+                var q = from p in proc.Value.Addrs orderby p select string.Format("{0:x8} {1}", p, disasm[p].Text);
+                foreach (var l in q)
+                {
+                    writer.WriteLine(l);
+                }
+                writer.WriteLine();
+            }
         }
     }
 }
