@@ -50,7 +50,10 @@
   <ItemGroup>
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Logger.cs" />
+    <Compile Include="Core\Engine.cs" />
+    <Compile Include="Core\Preprocessing\AccessLog.cs" />
     <Compile Include="Core\ITraceAnalyzer.cs" />
+    <Compile Include="Core\Preprocessing\ProcScope.cs" />
     <Compile Include="Core\TraceDriver.cs" />
     <Compile Include="Frontend\Context.cs" />
     <Compile Include="Frontend\Disasm.cs" />

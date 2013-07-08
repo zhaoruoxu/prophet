@@ -7,7 +7,7 @@ using Prophet.Frontend;
 
 namespace Prophet.Core
 {
-    class ExecuteTraceEvent
+    public class ExecuteTraceEvent
     {
         public int Seq { get; set; }
         public Message Message { get; set; }
@@ -21,7 +21,7 @@ namespace Prophet.Core
         }
     }
 
-    interface ITraceAnalyzer
+    public interface ITraceAnalyzer
     {
         void Reset();
         void OnComplete();

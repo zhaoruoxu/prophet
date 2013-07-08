@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Prophet.Common;
+using Prophet.Core;
 using Prophet.Frontend;
 
 namespace Prophet
@@ -21,6 +22,8 @@ namespace Prophet
                 return;
             }
             var frontend = new FrontendCore(args[0]);
+            var engine = new Engine(frontend);
+            engine.Go();
         }
     }
 }

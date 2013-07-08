@@ -10,14 +10,12 @@ namespace Prophet.Core
 {
     class TraceDriver : ITraceAnalyzer
     {
-        private IList<Context> _contexts;
         private readonly List<ITraceAnalyzer> _analyzers = new List<ITraceAnalyzer>();
         private Context _prev;
 
 
-        public TraceDriver(IList<Context> contexts)
+        public TraceDriver()
         {
-            _contexts = contexts;
         }
 
         public TraceDriver Add(ITraceAnalyzer analyzer)

@@ -68,6 +68,8 @@ namespace Prophet.Common
         public static void Error(string fmt, params object[] args)
         {
             Log(Level.Error, fmt, args);
+            var str = string.Format(fmt, args);
+            throw new Exception(str);
         }
     }
 }

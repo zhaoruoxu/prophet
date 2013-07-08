@@ -21,6 +21,8 @@ namespace Prophet.Frontend
             get { return _disasm; }
         }
 
+        public Dictionary<int, Message> Messages { get { return _messages; } } 
+
         public FrontendCore(string dbpath)
         {
             _dbpath = dbpath;
@@ -30,6 +32,7 @@ namespace Prophet.Frontend
                 InitDisasm(conn);
                 LoadMessages(conn);
             }
+            Logger.Debug("Disasm instruction count: {0}", _disasm.Count);
         }
 
         private void InitDisasm(SQLiteConnection conn)

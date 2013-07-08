@@ -29,5 +29,7 @@ namespace Prophet.Frontend
                 return _instrs[offset];
             }
         }
+
+        internal int Count { get { return _instrs.Count; } }
     }
 }
